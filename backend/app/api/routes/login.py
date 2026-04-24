@@ -8,17 +8,17 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from starlette.requests import Request
 
-from app import crud
-from app.api.deps import (
+import crud
+from api.deps import (
     CurrentUser,
     SessionDep,
     get_current_active_superuser,
     get_current_user,
 )
-from app.core import security
-from app.core.config import settings
-from app.models import Message, NewPassword, Token, UserPublic
-from app.utils import (
+from core import security
+from core.config import settings
+from models import Message, NewPassword, Token, UserPublic
+from utils import (
     generate_password_reset_token,
     generate_reset_password_email,
     is_prod,

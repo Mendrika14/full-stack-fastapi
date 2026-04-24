@@ -14,7 +14,7 @@ from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing_extensions import Self
 
-DEFAULT_SECRET_VALUE: str = "changethis"
+DEFAULT_SECRET_VALUE: str = "test"
 
 
 def parse_cors(v: Any) -> list[str] | str:
@@ -37,19 +37,19 @@ class Settings(BaseSettings):
     # ------- Required variables -------
 
     # Frontend url
-    SITE_URL: str
+    SITE_URL: str = "http://localhost:3000"
 
     # DATABASE_URL | POSTGRES_*
 
     # e.g. Neon
-    DATABASE_URL: PostgresDsn | None = None
+    DATABASE_URL: PostgresDsn | None = PostgresDsn("postgresql://postgres:sylvestre@localhost:5432/test")
 
     # Local / Docker fallback
-    POSTGRES_SERVER: str | None = None
+    POSTGRES_SERVER: str | None = "localhost"
     POSTGRES_PORT: int = 5432
-    POSTGRES_USER: str | None = None
-    POSTGRES_PASSWORD: str | None = None
-    POSTGRES_DB: str | None = None
+    POSTGRES_USER: str | None = "postgres"
+    POSTGRES_PASSWORD: str | None = "sylvestre"
+    POSTGRES_DB: str | None = "test"
 
     # ------- Optional variables -------
 

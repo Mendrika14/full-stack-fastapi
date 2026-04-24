@@ -8,15 +8,16 @@ from jwt.exceptions import InvalidTokenError
 from pydantic import ValidationError
 from sqlmodel import Session
 
-from app.core import security
-from app.core.config import settings
-from app.core.db import engine
-from app.models import TokenPayload, User
+from core import security
+from core.config import settings
+from core.db import engine
+from models import TokenPayload, User
 
 cookie_scheme = APIKeyCookie(name=settings.AUTH_COOKIE)
 
 
 def get_db() -> Generator[Session, None, None]:
+    # return Session(engine)
     with Session(engine) as session:
         yield session
 

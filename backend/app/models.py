@@ -50,6 +50,8 @@ class UpdatePassword(SQLModel):
 
 # Database model, database table inferred from class name
 class User(UserBase, table=True):
+    __tablename__ = "user"
+    __table_args__ = {'extend_existing': True}   # add this as table arguments
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     hashed_password: str | None = None  # password | github
     items: list["Item"] = Relationship(back_populates="owner", cascade_delete=True)
@@ -83,6 +85,8 @@ class ItemUpdate(ItemBase):
 
 # Database model, database table inferred from class name
 class Item(ItemBase, table=True):
+    __tablename__ = "item"
+    __table_args__ = {'extend_existing': True}   # add this as table arguments
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     title: str = Field(max_length=255)
     owner_id: uuid.UUID = Field(

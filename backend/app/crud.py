@@ -3,8 +3,8 @@ from typing import Any
 
 from sqlmodel import Session, select
 
-from app.core.security import get_password_hash, verify_password
-from app.models import Item, ItemCreate, User, UserCreate, UserUpdate
+from core.security import get_password_hash, verify_password
+from models import Item, ItemCreate, User, UserCreate, UserUpdate
 
 
 def create_user(*, session: Session, user_create: UserCreate) -> User:
@@ -33,6 +33,7 @@ def update_user(*, session: Session, db_user: User, user_in: UserUpdate) -> Any:
 
 def get_user_by_email(*, session: Session, email: str) -> User | None:
     statement = select(User).where(User.email == email)
+    # statement = select(User)
     session_user = session.exec(statement).first()
     return session_user
 
@@ -55,7 +56,8 @@ def authenticate_github(
     github_id_str = str(profile.get("id"))
 
     # Find or create user
-    user = session.exec(select(User).where(User.oauth_id == github_id_str)).first()
+    statement = select(User).where(User.oauth_id == github_id_str)
+    user = session.exec(statement).first()
 
     if not user:
         fallback_email = (

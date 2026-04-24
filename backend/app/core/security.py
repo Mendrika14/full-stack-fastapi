@@ -5,9 +5,9 @@ import jwt
 from authlib.integrations.starlette_client import OAuth
 from passlib.context import CryptContext
 
-from app.core.config import settings
+from core.config import settings
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
 ALGORITHM = "HS256"
 

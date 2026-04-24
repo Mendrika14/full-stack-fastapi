@@ -4,14 +4,14 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-import emails  # type: ignore
+# import emails  # type: ignore
 import jwt
 from jinja2 import Template
 from jwt.exceptions import InvalidTokenError
 from pydantic import BaseModel
 
-from app.core import security
-from app.core.config import settings
+from core import security
+from core.config import settings
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

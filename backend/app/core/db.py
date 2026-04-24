@@ -1,9 +1,9 @@
 from sqlalchemy import text
 from sqlmodel import Session, SQLModel, create_engine
 
-from app import crud
-from app.core.config import settings
-from app.models import ItemCreate, User, UserCreate
+import crud
+from core.config import settings
+from models import ItemCreate, User, UserCreate
 
 engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
 
@@ -66,6 +66,7 @@ def init_db(session: Session) -> None:
             )
 
     session.commit()
+    print("DB INIT")
 
 
 def truncate_all_tables(session: Session) -> None:
@@ -78,3 +79,4 @@ def truncate_all_tables(session: Session) -> None:
 
     session.exec(text(f"TRUNCATE TABLE {table_names} RESTART IDENTITY CASCADE;"))
     session.commit()
+    print("TABLE TRUNCATE")
